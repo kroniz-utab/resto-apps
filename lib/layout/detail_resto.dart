@@ -268,10 +268,7 @@ class DetailResto extends StatelessWidget {
   Widget _buildTopReview(CustomerReview review) {
     var _reviewerName = review.name;
     var _reviewerSplit = _reviewerName.split(" ");
-    String _initials = _reviewerSplit.length > 1
-        ? _reviewerSplit[0].substring(0, 1).toUpperCase() +
-            _reviewerSplit[1].substring(0, 1).toUpperCase()
-        : _reviewerSplit[0].substring(0, 2).toUpperCase();
+    String _initials = _reviewerSplit[0].substring(0, 2).toUpperCase();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
