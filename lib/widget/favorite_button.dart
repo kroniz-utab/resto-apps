@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:restaurant_apps/theme/color.dart';
 
 class FavoriteButton extends StatefulWidget {
   final double size;
   final bool isFavorite;
+
   FavoriteButton({
     Key? key,
     required this.size,
@@ -13,17 +15,12 @@ class FavoriteButton extends StatefulWidget {
   @override
   _FavoriteButtonState createState() => _FavoriteButtonState(
         isFavoritePassed: isFavorite,
-        sizePassed: size,
       );
 }
 
 class _FavoriteButtonState extends State<FavoriteButton> {
   bool isFavoritePassed;
-  double sizePassed;
-  _FavoriteButtonState({
-    required this.isFavoritePassed,
-    required this.sizePassed,
-  });
+  _FavoriteButtonState({required this.isFavoritePassed});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,8 +30,8 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         });
       },
       child: Container(
-        width: sizePassed,
-        height: sizePassed,
+        width: widget.size,
+        height: widget.size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           boxShadow: [

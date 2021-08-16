@@ -8,14 +8,16 @@ class RestoCard extends StatelessWidget {
   final String location;
   final String restoName;
   final double rating;
-  final String imgUrl;
+  final String imgID;
+  final Function() onClick;
 
   const RestoCard({
     Key? key,
     required this.location,
     required this.restoName,
     required this.rating,
-    required this.imgUrl,
+    required this.imgID,
+    required this.onClick,
   }) : super(key: key);
 
   @override
@@ -35,105 +37,112 @@ class RestoCard extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Stack(
-            children: [
-              Positioned.fill(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/images/placeholder.jpg',
-                    image: imgUrl,
-                    fit: BoxFit.cover,
+          GestureDetector(
+            onTap: onClick,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/images/placeholder.jpg',
+                      image:
+                          'https://restaurant-api.dicoding.dev/images/medium/$imgID',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                decoration: new BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      blackColor.withOpacity(.5),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: [0.4, 0.8],
+                Container(
+                  decoration: new BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.transparent,
+                        blackColor.withOpacity(.5),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0.4, 0.8],
+                    ),
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
-                  borderRadius: BorderRadius.circular(20.0),
                 ),
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 60,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 2.0,
-                        horizontal: 8.0,
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 60,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 2.0,
+                          horizontal: 8.0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: blackColor.withOpacity(.25),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: starColor,
+                              size: 18,
+                            ),
+                            Text(
+                              '$rating',
+                              style: ratingTextStyle,
+                            )
+                          ],
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        color: blackColor.withOpacity(.25),
-                        borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 160,
+                  right: 8,
+                  left: 8,
+                  bottom: 8,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        restoName,
+                        style: placeNameTextStyle,
+                        maxLines: 2,
+                        overflow: TextOverflow.clip,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.star,
-                            color: starColor,
+                            Icons.place,
+                            color: whiteColor,
                             size: 18,
                           ),
                           Text(
-                            '$rating',
-                            style: ratingTextStyle,
-                          )
+                            location,
+                            style: locationOnCardTextStyle,
+                          ),
                         ],
-                      ),
-                    ),
+                      )
+                    ],
                   ),
                 ),
-              ),
-              Positioned(
-                top: 160,
-                right: 8,
-                left: 8,
-                bottom: 8,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      restoName,
-                      style: placeNameTextStyle,
-                      maxLines: 2,
-                      overflow: TextOverflow.clip,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.place,
-                          color: whiteColor,
-                          size: 18,
-                        ),
-                        Text(
-                          location,
-                          style: locationOnCardTextStyle,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
           Align(
             alignment: Alignment.topRight,
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: FavoriteButton(size: 30, isFavorite: false),
+              child: FavoriteButton(
+                size: 30,
+                isFavorite: false,
+              ),
             ),
           )
         ],

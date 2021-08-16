@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
+
 import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';
 
 class SearchBox extends StatefulWidget {
+  final TextEditingController controller;
+  final FocusNode focusNode;
+  final Function(String value)? onSubmited;
+
+  SearchBox({
+    Key? key,
+    required this.controller,
+    required this.focusNode,
+    this.onSubmited,
+  }) : super(key: key);
+
   @override
   _SearchBoxState createState() => _SearchBoxState();
 }
 
 class _SearchBoxState extends State<SearchBox> {
-  TextEditingController _textEditingController = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,12 +27,14 @@ class _SearchBoxState extends State<SearchBox> {
       height: 50,
       child: new Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(3.0),
+          borderRadius: BorderRadius.circular(13.0),
           side: BorderSide(
-            color: blackColor.withOpacity(.01),
+            color: darkBlueColor.withOpacity(.1),
             width: 1,
           ),
         ),
+        elevation: 3,
+        shadowColor: mainColor.withOpacity(.4),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -35,8 +47,10 @@ class _SearchBoxState extends State<SearchBox> {
               Expanded(
                 flex: 2,
                 child: TextField(
+                  autofocus: true,
+                  focusNode: widget.focusNode,
                   textInputAction: TextInputAction.search,
-                  controller: _textEditingController,
+                  controller: widget.controller,
                   decoration: new InputDecoration(
                     hintText: 'Search restaurant',
                     border: InputBorder.none,
@@ -48,11 +62,12 @@ class _SearchBoxState extends State<SearchBox> {
                       horizontal: 6.0,
                     ),
                   ),
+                  onSubmitted: widget.onSubmited,
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  _textEditingController.clear();
+                  widget.controller.clear();
                 },
                 child: Icon(
                   Icons.cancel,

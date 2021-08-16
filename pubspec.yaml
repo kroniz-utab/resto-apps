@@ -21,13 +21,17 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  connectivity: ^3.0.6
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.1
   flutter:
     sdk: flutter
   flutter_fadein: ^2.0.0
+  flutter_rating_bar: ^4.0.0
   google_fonts: ^2.1.0
   http: ^0.13.3
+  loading_indicator: ^3.0.1
+  provider: ^5.0.0
   readmore: ^2.1.0
 
 dev_dependencies:

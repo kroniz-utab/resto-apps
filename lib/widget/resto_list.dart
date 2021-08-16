@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 
 import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';
+import 'package:restaurant_apps/widget/favorite_button.dart';
 
 class RestoList extends StatelessWidget {
   final String restoRating;
   final String restoLocation;
   final String restoName;
-  final String imgUrl;
+  final String imgID;
+  final Function() onClick;
 
   const RestoList({
     Key? key,
     required this.restoRating,
     required this.restoLocation,
     required this.restoName,
-    required this.imgUrl,
+    required this.imgID,
+    required this.onClick,
   }) : super(key: key);
 
   @override
@@ -34,82 +37,93 @@ class RestoList extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/images/placeholder.jpg',
-                      image: imgUrl,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.transparent,
-                          blackColor.withOpacity(.5),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.4, 0.8],
+            GestureDetector(
+              onTap: onClick,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: FadeInImage.assetNetwork(
+                        placeholder: 'assets/images/placeholder.jpg',
+                        image:
+                            'https://restaurant-api.dicoding.dev/images/medium/$imgID',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 90,
-                    bottom: 8,
-                    right: 8,
-                    left: 8,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          restoName,
-                          style: placeNameTextStyle,
-                          maxLines: 1,
-                          overflow: TextOverflow.clip,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.place,
-                              color: whiteColor,
-                              size: 18,
-                            ),
-                            SizedBox(width: 2),
-                            Text(
-                              restoLocation,
-                              style: locationOnCardTextStyle,
-                            ),
-                            SizedBox(width: 16),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: starColor,
-                                  size: 18,
-                                ),
-                                SizedBox(width: 2),
-                                Text(
-                                  restoRating,
-                                  style: locationOnCardTextStyle,
-                                )
-                              ],
-                            )
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            blackColor.withOpacity(.5),
                           ],
-                        )
-                      ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.4, 0.8],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      top: 90,
+                      bottom: 8,
+                      right: 8,
+                      left: 8,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            restoName,
+                            style: placeNameTextStyle,
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.place,
+                                color: whiteColor,
+                                size: 18,
+                              ),
+                              SizedBox(width: 2),
+                              Text(
+                                restoLocation,
+                                style: locationOnCardTextStyle,
+                              ),
+                              SizedBox(width: 16),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: starColor,
+                                    size: 18,
+                                  ),
+                                  SizedBox(width: 2),
+                                  Text(
+                                    restoRating,
+                                    style: locationOnCardTextStyle,
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: FavoriteButton(size: 30, isFavorite: false),
+              ),
+            )
           ],
         ),
       ),

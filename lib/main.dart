@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/layout/get_started_page.dart';
 import 'package:restaurant_apps/layout/main_page.dart';
-import 'package:restaurant_apps/model/restaurants.dart';
+import 'package:restaurant_apps/layout/search_page.dart';
 import 'package:restaurant_apps/theme/color.dart';
 
 void main() {
@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
         GetStartedPage.routeName: (context) => GetStartedPage(),
         MainPage.routeName: (context) => MainPage(),
         DetailResto.routeName: (context) => DetailResto(
-              restaurants:
-                  ModalRoute.of(context)?.settings.arguments as Restaurants,
-            )
+              restoID: ModalRoute.of(context)?.settings.arguments as String,
+            ),
+        SearchPage.routeName: (context) => SearchPage(),
       },
     );
   }

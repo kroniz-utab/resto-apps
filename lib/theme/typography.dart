@@ -85,3 +85,32 @@ TextStyle menuNameTextStyle = GoogleFonts.poppins(
   fontSize: 16,
   fontWeight: FontWeight.w700,
 );
+
+TextStyle alertTittleMessage = GoogleFonts.poppins(
+  color: darkBlueColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle alertContentMessage = GoogleFonts.poppins(
+  color: darkBlueColor,
+  fontSize: 12,
+);
+
+TextStyle avatarNameTextStyle = GoogleFonts.poppins(
+  color: whiteColor,
+  fontSize: 20,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle reviewerNameTextStyle = GoogleFonts.poppins(
+  color: darkBlueColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle reviewerDateTextStyle = GoogleFonts.poppins(
+  color: darkBlueColor.withOpacity(.4),
+  fontSize: 10,
+  fontStyle: FontStyle.italic,
+);
