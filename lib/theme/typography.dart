@@ -114,3 +114,8 @@ TextStyle reviewerDateTextStyle = GoogleFonts.poppins(
   fontSize: 10,
   fontStyle: FontStyle.italic,
 );
+
+TextStyle infoTextStyle = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.w500,
+);

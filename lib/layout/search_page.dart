@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:loading_indicator/loading_indicator.dart';
@@ -11,7 +12,7 @@ import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';
 import 'package:restaurant_apps/widget/resto_list.dart';
 
-enum SearchState { Loading, NoData, Error, NoInput }
+enum SearchState { Loading, NoData, Error, NoInput, NoInternet }
 
 class SearchPage extends StatefulWidget {
   static const routeName = '/searchPage';
@@ -47,17 +48,22 @@ class _SearchPageState extends State<SearchPage> {
       _streamController.add(SearchState.NoInput);
     } else {
       try {
-        _streamController.add(SearchState.Loading);
-        final String url =
-            'https://restaurant-api.dicoding.dev/search?q=${_textEditingController.text.trim()}';
+        final connection = await Connectivity().checkConnectivity();
+        if (connection == ConnectivityResult.none) {
+          _streamController.add(SearchState.NoInternet);
+        } else {
+          _streamController.add(SearchState.Loading);
+          final String url =
+              'https://restaurant-api.dicoding.dev/search?q=${_textEditingController.text.trim()}';
 
-        http.Response response = await http.get(Uri.parse(url));
-        if (response.statusCode == 200) {
-          var result = RestoSearchModel.fromJson(jsonDecode(response.body));
-          if (result.restaurants.length == 0) {
-            _streamController.add(SearchState.NoData);
-          } else {
-            _streamController.add(result);
+          http.Response response = await http.get(Uri.parse(url));
+          if (response.statusCode == 200) {
+            var result = RestoSearchModel.fromJson(jsonDecode(response.body));
+            if (result.restaurants.length == 0) {
+              _streamController.add(SearchState.NoData);
+            } else {
+              _streamController.add(result);
+            }
           }
         }
       } catch (e) {
@@ -146,7 +152,10 @@ class _SearchPageState extends State<SearchPage> {
                   if (snapshot.data == SearchState.NoInput ||
                       snapshot.data == null) {
                     return Center(
-                      child: Text('Enter a search word'),
+                      child: Text(
+                        'Enter a search word',
+                        style: infoTextStyle,
+                      ),
                     );
                   } else if (snapshot.data == SearchState.Loading) {
                     return Center(
@@ -168,7 +177,17 @@ class _SearchPageState extends State<SearchPage> {
                   } else if (snapshot.data == SearchState.NoData) {
                     return Center(
                       child: Text(
-                          '\'${_textEditingController.text.trim()}\' restaurant was not found!'),
+                        '\'${_textEditingController.text.trim()}\' restaurant was not found!',
+                        style: infoTextStyle,
+                      ),
+                    );
+                  } else if (snapshot.data == SearchState.NoInternet) {
+                    return Center(
+                      child: Text(
+                        'Your device is not connected to internet, Make sure your device connected to wifi/celular data first!',
+                        style: infoTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
                     );
                   } else {
                     final List<Restaurant> dataList = snapshot.data.restaurants;

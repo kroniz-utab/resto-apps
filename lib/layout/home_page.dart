@@ -28,6 +28,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    Provider.of<ConnectivityProvider>(context, listen: false)
+        .startMonitoring()
+        .close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,

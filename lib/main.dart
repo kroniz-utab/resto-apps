@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/layout/get_started_page.dart';
 import 'package:restaurant_apps/layout/main_page.dart';
 import 'package:restaurant_apps/layout/search_page.dart';
+import 'package:restaurant_apps/provider/connectivity_provider.dart';
 import 'package:restaurant_apps/theme/color.dart';
 
 void main() {
@@ -12,22 +14,29 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Restaurant Apps',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        primaryColor: mainColor,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ConnectivityProvider>(
+          create: (context) => ConnectivityProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Restaurant Apps',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          primaryColor: mainColor,
+        ),
+        debugShowCheckedModeBanner: false,
+        initialRoute: GetStartedPage.routeName,
+        routes: {
+          GetStartedPage.routeName: (context) => GetStartedPage(),
+          MainPage.routeName: (context) => MainPage(),
+          DetailResto.routeName: (context) => DetailResto(
+                restoID: ModalRoute.of(context)?.settings.arguments as String,
+              ),
+          SearchPage.routeName: (context) => SearchPage(),
+        },
       ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: GetStartedPage.routeName,
-      routes: {
-        GetStartedPage.routeName: (context) => GetStartedPage(),
-        MainPage.routeName: (context) => MainPage(),
-        DetailResto.routeName: (context) => DetailResto(
-              restoID: ModalRoute.of(context)?.settings.arguments as String,
-            ),
-        SearchPage.routeName: (context) => SearchPage(),
-      },
     );
   }
 }

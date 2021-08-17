@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:restaurant_apps/theme/color.dart';
+import 'package:restaurant_apps/theme/typography.dart';
 
 class SupportContentPage extends StatelessWidget {
   final String imageAssets;
@@ -36,10 +36,7 @@ class SupportContentPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               message,
-              style: GoogleFonts.poppins(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-              ),
+              style: infoTextStyle,
               textAlign: TextAlign.center,
             ),
           ),
