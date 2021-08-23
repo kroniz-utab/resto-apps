@@ -121,7 +121,10 @@ class RestoList extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: FavoriteButton(size: 30, isFavorite: false),
+                child: FavoriteButton(
+                  size: 30,
+                  resto: resto,
+                ),
               ),
             )
           ],

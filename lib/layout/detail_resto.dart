@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/model/restaurant_details.dart';
+import 'package:restaurant_apps/model/restaurant_list_model.dart';
 import 'package:restaurant_apps/provider/resto_detail_provider.dart';
 
 import 'package:restaurant_apps/theme/color.dart';
@@ -90,6 +91,14 @@ class DetailResto extends StatelessWidget {
   }
 
   Widget _buildOverallPage(RestaurantDetail detailData) {
+    final Restaurant resto = Restaurant(
+      id: detailData.id,
+      name: detailData.name,
+      description: detailData.description,
+      pictureId: detailData.pictureId,
+      city: detailData.city,
+      rating: detailData.rating,
+    );
     return FadeIn(
       duration: Duration(seconds: 1),
       curve: Curves.easeOut,
@@ -124,7 +133,10 @@ class DetailResto extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           CustomBackButton(size: 40, buttonSize: 22),
-                          FavoriteButton(size: 40, isFavorite: false),
+                          FavoriteButton(
+                            size: 40,
+                            resto: resto,
+                          ),
                         ],
                       ),
                     )

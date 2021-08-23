@@ -138,7 +138,7 @@ class RestoCard extends StatelessWidget {
               padding: EdgeInsets.all(8.0),
               child: FavoriteButton(
                 size: 30,
-                isFavorite: false,
+                resto: resto,
               ),
             ),
           )

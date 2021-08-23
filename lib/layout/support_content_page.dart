@@ -1,47 +1,36 @@
 import 'package:flutter/material.dart';
 
-import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';
 
 class SupportContentPage extends StatelessWidget {
   final String imageAssets;
   final String message;
-  const SupportContentPage({
+  final double? width;
+  SupportContentPage({
     Key? key,
     required this.imageAssets,
     required this.message,
+    this.width,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.white,
-            bgGradientColor.withOpacity(.25),
-          ],
-          stops: [0, 1],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset(
+          imageAssets,
+          width: width ?? null,
         ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            imageAssets,
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            message,
+            style: infoTextStyle,
+            textAlign: TextAlign.center,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              message,
-              style: infoTextStyle,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
