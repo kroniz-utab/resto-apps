@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 RestaurantsListModel restaurantsListModelFromJson(String str) =>
     RestaurantsListModel.fromJson(json.decode(str));
 
@@ -26,7 +28,8 @@ class RestaurantsListModel {
       );
 }
 
-class Restaurant {
+// ignore: must_be_immutable
+class Restaurant extends Equatable {
   Restaurant({
     required this.id,
     required this.name,
@@ -60,4 +63,7 @@ class Restaurant {
         "city": city,
         "rating": rating,
       };
+
+  @override
+  List<Object?> get props => [id, name, pictureId, city];
 }
