@@ -89,7 +89,7 @@ class DetailResto extends StatelessWidget {
     );
   }
 
-  FadeIn _buildOverallPage(RestaurantDetail detailData) {
+  Widget _buildOverallPage(RestaurantDetail detailData) {
     return FadeIn(
       duration: Duration(seconds: 1),
       curve: Curves.easeOut,

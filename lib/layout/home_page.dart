@@ -22,17 +22,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  void initState() {
-    super.initState();
-    Provider.of<ConnectivityProvider>(context, listen: false).startMonitoring();
-  }
-
-  @override
-  void dispose() {
-    Provider.of<ConnectivityProvider>(context, listen: false)
-        .startMonitoring()
-        .close();
-    super.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      Provider.of<ConnectivityProvider>(context, listen: false)
+          .startMonitoring();
+    });
   }
 
   @override
