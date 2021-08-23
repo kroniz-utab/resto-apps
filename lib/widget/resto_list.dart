@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_apps/layout/detail_resto.dart';
 
+import 'package:restaurant_apps/model/restaurant_list_model.dart';
 import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';
 import 'package:restaurant_apps/widget/favorite_button.dart';
 
 class RestoList extends StatelessWidget {
-  final String restoRating;
-  final String restoLocation;
-  final String restoName;
-  final String imgID;
-  final Function() onClick;
+  final Restaurant resto;
 
   const RestoList({
     Key? key,
-    required this.restoRating,
-    required this.restoLocation,
-    required this.restoName,
-    required this.imgID,
-    required this.onClick,
+    required this.resto,
   }) : super(key: key);
 
   @override
@@ -38,7 +32,13 @@ class RestoList extends StatelessWidget {
         child: Stack(
           children: [
             GestureDetector(
-              onTap: onClick,
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  DetailResto.routeName,
+                  arguments: resto.id,
+                );
+              },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Stack(
@@ -47,7 +47,7 @@ class RestoList extends StatelessWidget {
                       child: FadeInImage.assetNetwork(
                         placeholder: 'assets/images/placeholder.jpg',
                         image:
-                            'https://restaurant-api.dicoding.dev/images/medium/$imgID',
+                            'https://restaurant-api.dicoding.dev/images/medium/${resto.pictureId}',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -74,7 +74,7 @@ class RestoList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            restoName,
+                            resto.name,
                             style: placeNameTextStyle,
                             maxLines: 1,
                             overflow: TextOverflow.clip,
@@ -90,7 +90,7 @@ class RestoList extends StatelessWidget {
                               ),
                               SizedBox(width: 2),
                               Text(
-                                restoLocation,
+                                resto.city,
                                 style: locationOnCardTextStyle,
                               ),
                               SizedBox(width: 16),
@@ -103,7 +103,7 @@ class RestoList extends StatelessWidget {
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    restoRating,
+                                    resto.rating.toString(),
                                     style: locationOnCardTextStyle,
                                   )
                                 ],

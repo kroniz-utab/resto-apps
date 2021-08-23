@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/layout/search_page.dart';
 import 'package:restaurant_apps/layout/support_content_page.dart';
 import 'package:restaurant_apps/provider/connectivity_provider.dart';
@@ -240,17 +239,7 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 var resto = state.restaurantList.restaurants[index];
                 return RestoList(
-                  restoRating: resto.rating.toString(),
-                  restoLocation: resto.city,
-                  restoName: resto.name,
-                  imgID: resto.pictureId,
-                  onClick: () {
-                    Navigator.pushNamed(
-                      context,
-                      DetailResto.routeName,
-                      arguments: resto.id,
-                    );
-                  },
+                  resto: resto,
                 );
               },
               separatorBuilder: (context, index) {
@@ -309,17 +298,7 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   var restoBestData = state.restoBest[index];
                   return RestoCard(
-                    location: restoBestData.city,
-                    restoName: restoBestData.name,
-                    rating: restoBestData.rating,
-                    imgID: restoBestData.pictureId,
-                    onClick: () {
-                      Navigator.pushNamed(
-                        context,
-                        DetailResto.routeName,
-                        arguments: restoBestData.id,
-                      );
-                    },
+                    resto: restoBestData,
                   );
                 },
                 separatorBuilder: (context, index) {

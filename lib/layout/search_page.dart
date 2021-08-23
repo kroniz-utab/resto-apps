@@ -5,7 +5,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/model/restaurant_list_model.dart';
 import 'package:restaurant_apps/model/restaurant_search_model.dart';
 import 'package:restaurant_apps/theme/color.dart';
@@ -202,17 +201,7 @@ class _SearchPageState extends State<SearchPage> {
                           itemBuilder: (context, index) {
                             final Restaurant data = dataList[index];
                             return RestoList(
-                              restoRating: data.rating.toString(),
-                              restoLocation: data.city,
-                              restoName: data.name,
-                              imgID: data.pictureId,
-                              onClick: () {
-                                Navigator.pushReplacementNamed(
-                                  context,
-                                  DetailResto.routeName,
-                                  arguments: data.id,
-                                );
-                              },
+                              resto: data,
                             );
                           },
                           separatorBuilder: (context, index) {

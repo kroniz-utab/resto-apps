@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/layout/get_started_page.dart';
 import 'package:restaurant_apps/layout/main_page.dart';
 import 'package:restaurant_apps/layout/search_page.dart';
 import 'package:restaurant_apps/provider/connectivity_provider.dart';
+import 'package:restaurant_apps/provider/resto_best_provider.dart';
+import 'package:restaurant_apps/provider/resto_provider.dart';
 import 'package:restaurant_apps/theme/color.dart';
 
 void main() {
@@ -16,6 +19,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<RestaurantListProvider>(
+          create: (context) => RestaurantListProvider(
+            apiServices: ApiServices(),
+          ),
+        ),
+        ChangeNotifierProvider<RestaurantBestProvider>(
+          create: (context) => RestaurantBestProvider(
+            apiServices: ApiServices(),
+          ),
+        ),
         ChangeNotifierProvider<ConnectivityProvider>(
           create: (context) => ConnectivityProvider(),
         ),

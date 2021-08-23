@@ -1,11 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:restaurant_apps/api/api_service.dart';
+import 'package:restaurant_apps/layout/profile_page.dart';
 import 'package:restaurant_apps/layout/support_content_page.dart';
 import 'package:restaurant_apps/layout/home_page.dart';
-import 'package:restaurant_apps/provider/resto_best_provider.dart';
-import 'package:restaurant_apps/provider/resto_provider.dart';
 import 'package:restaurant_apps/theme/color.dart';
 
 class MainPage extends StatefulWidget {
@@ -39,21 +36,7 @@ class _MainPageState extends State<MainPage> {
   ];
 
   List<Widget> _pageList = [
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<RestaurantListProvider>(
-          create: (context) => RestaurantListProvider(
-            apiServices: ApiServices(),
-          ),
-        ),
-        ChangeNotifierProvider<RestaurantBestProvider>(
-          create: (context) => RestaurantBestProvider(
-            apiServices: ApiServices(),
-          ),
-        ),
-      ],
-      child: HomePage(),
-    ),
+    HomePage(),
     SupportContentPage(
       imageAssets: 'assets/images/coming_soon.png',
       message: 'This page will be coming soon!',
@@ -62,10 +45,7 @@ class _MainPageState extends State<MainPage> {
       imageAssets: 'assets/images/coming_soon.png',
       message: 'This page will be coming soon!',
     ),
-    SupportContentPage(
-      imageAssets: 'assets/images/coming_soon.png',
-      message: 'This page will be coming soon!',
-    ),
+    ProfilePage(),
   ];
 
   @override
