@@ -19,16 +19,14 @@ class DatabaseHelper {
       '$path/resto.db',
       onCreate: (db, version) async {
         await db.execute(
-          '''
-          CREATE TABLE $_tblFavorite (
-            id TEXT PRIMARY KEY,
-            name TEXT,
+          '''CREATE TABLE $_tblFavorite (
+            id VARCHAR PRIMARY KEY,
+            name VARCHAR,
             description TEXT,
-            pictureId TEXT,
-            city TEXT,
-            rating TEXT,
-          )
-          ''',
+            pictureId VARCHAR,
+            city VARCHAR,
+            rating DOUBLE
+          )''',
         );
       },
       version: 1,
