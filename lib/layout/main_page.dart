@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_apps/layout/explore_page.dart';
 import 'package:restaurant_apps/layout/favorite_page.dart';
 import 'package:restaurant_apps/layout/profile_page.dart';
-import 'package:restaurant_apps/layout/support_content_page.dart';
 import 'package:restaurant_apps/layout/home_page.dart';
 import 'package:restaurant_apps/theme/color.dart';
 
