@@ -10,6 +10,7 @@ import 'package:restaurant_apps/provider/connectivity_provider.dart';
 import 'package:restaurant_apps/provider/database_provider.dart';
 import 'package:restaurant_apps/provider/resto_best_provider.dart';
 import 'package:restaurant_apps/provider/resto_provider.dart';
+import 'package:restaurant_apps/provider/resto_shuffle_provider.dart';
 import 'package:restaurant_apps/theme/color.dart';
 
 void main() {
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<RestaurantListProvider>(
           create: (context) => RestaurantListProvider(
+            apiServices: ApiServices(),
+          ),
+        ),
+        ChangeNotifierProvider<RestaurantShuffleProvider>(
+          create: (context) => RestaurantShuffleProvider(
             apiServices: ApiServices(),
           ),
         ),

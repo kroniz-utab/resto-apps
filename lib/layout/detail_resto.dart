@@ -112,17 +112,20 @@ class DetailResto extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30),
-                      ),
-                      child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/images/placeholder.jpg',
-                        image:
-                            'https://restaurant-api.dicoding.dev/images/medium/${detailData.pictureId}',
-                        height: 325,
-                        fit: BoxFit.cover,
+                    Hero(
+                      tag: restoID,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
+                        ),
+                        child: FadeInImage.assetNetwork(
+                          placeholder: 'assets/images/placeholder.jpg',
+                          image:
+                              'https://restaurant-api.dicoding.dev/images/medium/${detailData.pictureId}',
+                          height: 325,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Padding(
