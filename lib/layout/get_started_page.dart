@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_apps/layout/main_page.dart';
+import 'package:restaurant_apps/provider/preferences_provider.dart';
 import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';
 
@@ -65,32 +67,37 @@ class _GetStartedPageState extends State<GetStartedPage>
                       style: subtitleStartedTextStyle,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        MainPage.routeName,
+                  Consumer<PreferencesProvider>(
+                    builder: (context, provider, child) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          provider.setNotFirstLogin();
+                          Navigator.pushReplacementNamed(
+                            context,
+                            MainPage.routeName,
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 30,
+                          ),
+                          child: Text(
+                            'Get Started',
+                            style: buttonTextStyle,
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(mainColor),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(color: mainColor),
+                            ),
+                          ),
+                        ),
                       );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 5,
-                        horizontal: 30,
-                      ),
-                      child: Text(
-                        'Get Started',
-                        style: buttonTextStyle,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(mainColor),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          side: BorderSide(color: mainColor),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
