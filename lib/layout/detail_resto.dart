@@ -6,10 +6,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
-import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/model/restaurant_details.dart';
 import 'package:restaurant_apps/model/restaurant_list_model.dart';
 import 'package:restaurant_apps/provider/resto_detail_provider.dart';
+import 'package:restaurant_apps/services/api/api_service.dart';
 
 import 'package:restaurant_apps/theme/color.dart';
 import 'package:restaurant_apps/theme/typography.dart';

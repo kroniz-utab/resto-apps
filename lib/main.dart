@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
-import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/helper/database_helper.dart';
+import 'package:restaurant_apps/helper/navigation_helper.dart';
+import 'package:restaurant_apps/helper/notification_helper.dart';
 import 'package:restaurant_apps/helper/preferences_helper.dart';
 import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/layout/get_started_page.dart';
@@ -14,10 +19,26 @@ import 'package:restaurant_apps/provider/preferences_provider.dart';
 import 'package:restaurant_apps/provider/resto_best_provider.dart';
 import 'package:restaurant_apps/provider/resto_provider.dart';
 import 'package:restaurant_apps/provider/resto_shuffle_provider.dart';
+import 'package:restaurant_apps/provider/scheduling_provider.dart';
+import 'package:restaurant_apps/services/api/api_service.dart';
+import 'package:restaurant_apps/services/background/background_service.dart';
 import 'package:restaurant_apps/theme/color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+
+  _service.initializeIsolate();
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
   runApp(MyApp());
 }
 
@@ -56,8 +77,12 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        ChangeNotifierProvider<SchedulingProvider>(
+          create: (context) => SchedulingProvider(),
+        ),
       ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: 'RestoGram',
         theme: ThemeData(
           primarySwatch: Colors.grey,

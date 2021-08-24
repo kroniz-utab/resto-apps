@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_apps/helper/navigation_helper.dart';
 import 'package:restaurant_apps/layout/detail_resto.dart';
 
 import 'package:restaurant_apps/model/restaurant_list_model.dart';
@@ -33,10 +34,9 @@ class RestoList extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(
-                  context,
+                Navigation.intentWithData(
                   DetailResto.routeName,
-                  arguments: resto.id,
+                  resto.id,
                 );
               },
               child: ClipRRect(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_apps/helper/navigation_helper.dart';
 
 import 'package:restaurant_apps/theme/color.dart';
 
@@ -15,7 +16,7 @@ class CustomBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
+        Navigation.back();
       },
       child: Container(
         height: size,

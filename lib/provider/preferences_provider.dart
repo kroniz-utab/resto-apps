@@ -7,7 +7,10 @@ class PreferencesProvider extends ChangeNotifier {
 
   PreferencesProvider({
     required this.preferencesHelper,
-  });
+  }) {
+    _getNotifOn();
+    _getFirstLogin();
+  }
 
   bool _isNotifOn = false;
   bool get isNotifOn => _isNotifOn;

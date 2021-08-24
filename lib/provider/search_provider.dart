@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/model/restaurant_search_model.dart';
+import 'package:restaurant_apps/services/api/api_service.dart';
 
 enum SearchResultState { Loading, NoData, HasData, Error }
 

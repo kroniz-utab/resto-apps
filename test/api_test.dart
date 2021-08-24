@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/model/restaurant_list_model.dart';
 import 'package:restaurant_apps/model/restaurant_search_model.dart';
+import 'package:restaurant_apps/services/api/api_service.dart';
 
 import 'api_test.mocks.dart';
 

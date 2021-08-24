@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant_apps/helper/notification_helper.dart';
+import 'package:restaurant_apps/layout/detail_resto.dart';
 import 'package:restaurant_apps/layout/explore_page.dart';
 import 'package:restaurant_apps/layout/favorite_page.dart';
 import 'package:restaurant_apps/layout/profile_page.dart';
@@ -16,16 +18,20 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _bottomNavIndex = 0;
   late PageController _pageController;
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _notificationHelper
+        .configureSelectNotificationSubject(DetailResto.routeName);
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    selectNotiicationSubject.close();
     super.dispose();
   }
 

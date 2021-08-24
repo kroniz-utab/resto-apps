@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:restaurant_apps/api/api_service.dart';
 import 'package:restaurant_apps/model/restaurant_list_model.dart';
+import 'package:restaurant_apps/services/api/api_service.dart';
 
 enum ResultListState { Loading, NoData, HasData, Error }
 

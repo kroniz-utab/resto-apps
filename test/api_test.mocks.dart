@@ -5,7 +5,7 @@
 import 'dart:async' as _i6;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:restaurant_apps/api/api_service.dart' as _i5;
+import 'package:restaurant_apps/services/api/api_service.dart' as _i5;
 import 'package:restaurant_apps/model/restaurant_details.dart' as _i3;
 import 'package:restaurant_apps/model/restaurant_list_model.dart' as _i2;
 import 'package:restaurant_apps/model/restaurant_search_model.dart' as _i4;
